@@ -10,11 +10,4 @@ import java.util.Optional;
 public interface AircraftRepository
     extends CrudRepository<Aircraft, Long> {
 
-        List<Aircraft> findAll ();
-
-        Optional<Aircraft> findById (Long id);
-
-        Object save (Aircraft aircraft);
-
-        void deleteById (Long id);
 }

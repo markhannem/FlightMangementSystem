@@ -11,43 +11,38 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/airports")
 public class AirportController {
+
     @Autowired
     private AirportRepository airportRepository;
 
     @Autowired
     private CityRepository cityRepository;
 
-    // Get all airports
     @GetMapping
     public List<Airport> getAllAirports() {
-        return airportRepository.getAllAirports();
+        return (List<Airport>) airportRepository.findAll();
     }
 
-    // Get airport by id
-    @GetMapping
+    @GetMapping("/{id}")
     public Airport getAirportById(@PathVariable Long id) {
-        return airportRepository.getAirportById(id);
+        return airportRepository.findById(id).get();
     }
 
-    // Create a new Airport
     @PostMapping
     public void createAirport(@RequestBody Airport airport) {
-        airportRepository.createAirport(airport);
+        airportRepository.save(airport);
     }
 
-    // Update an Existing Airport
-    @PutMapping
+    @PutMapping("/{id}")
     public void updateAirport(@PathVariable Long id, @RequestBody Airport airport) {
-        airportRepository.updateAirport(id, airport);
+        airportRepository.save(airport);
     }
 
-    // Delete an Existing Airport
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteAirport(@PathVariable Long id) {
-        airportRepository.deleteAirport(id);
+        airportRepository.deleteById(id);
     }
-
-
 
 }

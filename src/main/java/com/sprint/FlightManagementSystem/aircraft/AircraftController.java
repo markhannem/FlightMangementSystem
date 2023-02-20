@@ -8,40 +8,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/aircraft")
 public class AircraftController {
 
     @Autowired
     private AircraftRepository aircraftRepository;
 
     // Get all aircraft
-    @GetMapping
-    public List<Aircraft> getAllAircrafts() {
-        return aircraftRepository.findAll();
+    @GetMapping("/")
+    public List<Aircraft> getAllAircraft() {
+        return (List<Aircraft>) aircraftRepository.findAll();
     }
 
     // Get aircraft by id
-    @GetMapping
+    @GetMapping("/{id}")
     public Aircraft getAircraftById(@PathVariable Long id) {
         return aircraftRepository.findById(id).get();
     }
 
     // Create a new aircraft
-    @PostMapping
+    @PostMapping("/")
     public void createAircraft(@RequestBody Aircraft aircraft) {
         aircraftRepository.save(aircraft);
     }
 
     // Update an existing aircraft
-    @PutMapping
+    @PutMapping("/{id}")
     public void updateAircraft(@PathVariable Long id, @RequestBody Aircraft aircraft) {
         aircraftRepository.save(aircraft);
     }
 
     // Delete an existing aircraft
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteAircraft(@PathVariable Long id) {
         aircraftRepository.deleteById(id);
     }
-
-
 }
