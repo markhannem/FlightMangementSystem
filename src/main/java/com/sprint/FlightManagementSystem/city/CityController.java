@@ -14,25 +14,33 @@ public class CityController {
     @Autowired
     private CityRepository repo;
 
+    // GET REQUEST: All Cities
     @GetMapping("/cities")
     public List<City> getAllCities() {
         return (List<City>) repo.findAll();
     }
 
+    // POST REQUEST: Create a City
     @PostMapping("/city")
     public void createCity(@RequestBody City city) {
         repo.save(city);
     }
 
+    // PUT REQUEST: Update a City
     @PutMapping("/city/{id}")
-    public void updateCity(@PathVariable String id, @RequestBody City city, HttpServletResponse response) {
+    public void updateCity(@PathVariable String id, @RequestBody City city,
+                           HttpServletResponse response)
+    {
         Optional<City> returnValue = repo.findById(Long.parseLong(id));
         City cityToUpdate;
+
 
         if (returnValue.isPresent()) {
             cityToUpdate = returnValue.get();
 
             cityToUpdate.setName(city.getName());
+            cityToUpdate.setPopulation(city.getPopulation());
+            cityToUpdate.setState(city.getState());
 
             repo.save(cityToUpdate);
         } else {
