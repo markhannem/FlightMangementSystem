@@ -51,7 +51,7 @@ public class AirportController {
             apToUpdate.setCode(airport.getCode());
 
 
-            airportRepository.save(airport);
+            airportRepository.save(apToUpdate);
         } else {
             try {
                 response.sendError(404, "Airport with id: " + airport.getId() + " not found.");

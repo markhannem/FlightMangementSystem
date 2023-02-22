@@ -1,16 +1,15 @@
 package com.sprint.FlightManagementSystem.aircraft;
 
-
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/aircraft")
+@CrossOrigin
 public class AircraftController {
 
     @Autowired
@@ -46,9 +45,11 @@ public class AircraftController {
             acToUpdate = returnValue.get();
 
             acToUpdate.setType(aircraft.getType());
+            acToUpdate.setAirlineName(aircraft.getAirlineName());
+            acToUpdate.setNumberOfPassengers(aircraft.getNumberOfPassengers());
 
 
-            aircraftRepository.save(aircraft);
+            aircraftRepository.save(acToUpdate);
         } else {
             try {
                 response.sendError(404, "Aircraft with id: " + aircraft.getId() + " not found.");
