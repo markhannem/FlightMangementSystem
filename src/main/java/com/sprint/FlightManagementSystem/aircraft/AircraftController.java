@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@RequestMapping("aircrafts")
 @RestController
 @CrossOrigin
 public class AircraftController {
@@ -16,25 +17,25 @@ public class AircraftController {
     private AircraftRepository aircraftRepository;
 
     // Get all aircraft
-    @GetMapping("/aircrafts")
+    @GetMapping
     public List<Aircraft> getAllAircraft() {
         return (List<Aircraft>) aircraftRepository.findAll();
     }
 
     // Get aircraft by id
-    @GetMapping("/aircraft/{id}")
+    @GetMapping(path = "{id}")
     public Aircraft getAircraftById(@PathVariable Long id) {
         return aircraftRepository.findById(id).get();
     }
 
     // Create a new aircraft
-    @PostMapping("/aircraft")
+    @PostMapping
     public void createAircraft(@RequestBody Aircraft aircraft) {
         aircraftRepository.save(aircraft);
     }
 
     // Update an existing aircraft
-    @PutMapping("/aircraft/{id}")
+    @PutMapping(path = "{id}")
     public void updateAircraft(@PathVariable String id, @RequestBody Aircraft aircraft,
                                HttpServletResponse response) {
         Optional<Aircraft> returnValue = aircraftRepository.findById(Long.parseLong(id));
@@ -59,7 +60,7 @@ public class AircraftController {
         }
     }
     // Delete an existing aircraft
-    @DeleteMapping("/aircraft/{id}")
+    @DeleteMapping(path = "{id}")
     public void deleteAircraft (@PathVariable Long id){
         aircraftRepository.deleteById(id);
     }

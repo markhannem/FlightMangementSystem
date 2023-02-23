@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+
+@RequestMapping("airports")
 @RestController
 @CrossOrigin
 public class AirportController {
@@ -20,24 +22,24 @@ public class AirportController {
     private CityRepository cityRepository;
 
     // GET REQUEST: All Airports
-    @GetMapping("/airports")
+    @GetMapping
     public List<Airport> getAllAirports() {
         return (List<Airport>) airportRepository.findAll();
     }
 
-    @GetMapping("/airport/{id}")
+    @GetMapping(path = "{id}")
     public Airport getAirportById(@PathVariable Long id) {
         return airportRepository.findById(id).get();
     }
 
     // POST REQUEST: Create an Airport
-    @PostMapping("/airport")
+    @PostMapping
     public void createAirport(@RequestBody Airport airport) {
         airportRepository.save(airport);
     }
 
     // PUT REQUEST: Update an Airport
-    @PutMapping("/airport/{id}")
+    @PutMapping(path = "{id}")
     public void updateAirport(@PathVariable String id, @RequestBody Airport airport,
                                HttpServletResponse response) {
         Optional<Airport> returnValue = airportRepository.findById(Long.parseLong(id));
@@ -62,7 +64,7 @@ public class AirportController {
     }
 
     // DELETE REQUEST: Delete an Airport
-    @DeleteMapping("/airport/{id}")
+    @DeleteMapping(path = "{id}")
     public void deleteAirport(@PathVariable Long id) {
         airportRepository.deleteById(id);
     }

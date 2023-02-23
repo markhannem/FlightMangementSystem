@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@RequestMapping("cities")
 @RestController
 @CrossOrigin
 public class CityController {
@@ -15,19 +16,19 @@ public class CityController {
     private CityRepository repo;
 
     // GET REQUEST: All Cities
-    @GetMapping("/cities")
+    @GetMapping
     public List<City> getAllCities() {
         return (List<City>) repo.findAll();
     }
 
     // POST REQUEST: Create a City
-    @PostMapping("/city")
+    @PostMapping
     public void createCity(@RequestBody City city) {
         repo.save(city);
     }
 
     // PUT REQUEST: Update a City
-    @PutMapping("/city/{id}")
+    @PutMapping(path = "{id}")
     public void updateCity(@PathVariable String id, @RequestBody City city,
                            HttpServletResponse response)
     {
