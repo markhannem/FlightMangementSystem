@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@RequestMapping("passengers")
 @RestController
 @CrossOrigin
 public class PassengerController {
@@ -15,17 +16,17 @@ public class PassengerController {
     @Autowired
     private PassengerRepository repo;
 
-    @GetMapping("/passengers")
+    @GetMapping
     public List<Passenger> getAllPassengers() {return (List<Passenger>) repo.findAll();}
 
-    @PostMapping("/passenger")
+    @PostMapping
     public  String createPassenger(@RequestBody Passenger passenger) {
         repo.save(passenger);
         return "Passenger Added";
 
     }
 
-    @PutMapping("/passenger/{id}")
+    @PutMapping(path = "{id}")
     public void updatePassenger(@PathVariable String id, @RequestBody Passenger passenger, HttpServletResponse response) {
         Optional<Passenger> returnValue = repo.findById(Long.parseLong(id));
         Passenger passengerToUpdate;
