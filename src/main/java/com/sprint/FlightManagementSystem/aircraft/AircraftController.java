@@ -61,7 +61,17 @@ public class AircraftController {
     }
     // Delete an existing aircraft
     @DeleteMapping(path = "{id}")
-    public void deleteAircraft (@PathVariable Long id){
-        aircraftRepository.deleteById(id);
+    public void deleteAircraft(@PathVariable Long id, HttpServletResponse response) {
+        Optional<Aircraft> returnValue = aircraftRepository.findById(id);
+
+        if (returnValue.isPresent()) {
+            aircraftRepository.deleteById(id);
+        } else {
+            try {
+                response.sendError(404, "Aircraft with id: " + id + " not found.");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

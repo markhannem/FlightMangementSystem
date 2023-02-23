@@ -65,8 +65,17 @@ public class AirportController {
 
     // DELETE REQUEST: Delete an Airport
     @DeleteMapping(path = "{id}")
-    public void deleteAirport(@PathVariable Long id) {
-        airportRepository.deleteById(id);
-    }
+    public void deleteAirport(@PathVariable Long id, HttpServletResponse response) {
+        Optional<Airport> returnValue = airportRepository.findById(id);
 
+        if (returnValue.isPresent()) {
+            airportRepository.deleteById(id);
+        } else {
+            try {
+                response.sendError(404, "Airport with id: " + id + " not found.");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

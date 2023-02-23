@@ -48,6 +48,23 @@ public class PassengerController {
         }
     }
 
+    // DELETE REQUEST: Delete a Passenger
+    @DeleteMapping(path = "{id}")
+    public void deletePassenger(@PathVariable String id, HttpServletResponse response) {
+        Optional<Passenger> returnValue = repo.findById(Long.parseLong(id));
+
+        if (returnValue.isPresent()) {
+            Passenger passengerToDelete = returnValue.get();
+            repo.delete(passengerToDelete);
+        } else {
+            try {
+                response.sendError(404, "Passenger with id: " + id + " not found.");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 }
 
 

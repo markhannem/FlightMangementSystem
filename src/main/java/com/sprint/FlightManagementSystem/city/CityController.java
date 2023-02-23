@@ -53,4 +53,21 @@ public class CityController {
         }
     }
 
+    // DELETE REQUEST: Delete a City
+    @DeleteMapping(path = "{id}")
+    public void deleteCity(@PathVariable String id, HttpServletResponse response) {
+        Optional<City> returnValue = repo.findById(Long.parseLong(id));
+
+        if (returnValue.isPresent()) {
+            City cityToDelete = returnValue.get();
+            repo.delete(cityToDelete);
+        } else {
+            try {
+                response.sendError(404, "City with id: " + id + " not found.");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 }
