@@ -32,8 +32,9 @@ public class AirportController {
 
     // POST REQUEST: Create an Airport
     @PostMapping("/airport")
-    public void createAirport(@RequestBody Airport airport) {
+    public String createAirport(@RequestBody Airport airport) { //FIXED TO STRING
         airportRepository.save(airport);
+        return "The Airport was Added to Database";  //ADD THIS TO REST
     }
 
     // PUT REQUEST: Update an Airport

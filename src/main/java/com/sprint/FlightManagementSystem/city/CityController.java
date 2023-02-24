@@ -22,8 +22,9 @@ public class CityController {
 
     // POST REQUEST: Create a City
     @PostMapping("/city")
-    public void createCity(@RequestBody City city) {
+    public String createCity(@RequestBody City city) {
         repo.save(city);
+        return "The City info was Added to Database";
     }
 
     // PUT REQUEST: Update a City

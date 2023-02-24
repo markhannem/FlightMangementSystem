@@ -21,7 +21,7 @@ public class PassengerController {
     @PostMapping("/passenger")
     public  String createPassenger(@RequestBody Passenger passenger) {
         repo.save(passenger);
-        return "Passenger Added";
+        return "The Passenger info was Added to Database";
 
     }
 

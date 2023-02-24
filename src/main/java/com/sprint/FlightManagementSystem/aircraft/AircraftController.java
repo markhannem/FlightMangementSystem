@@ -29,8 +29,10 @@ public class AircraftController {
 
     // Create a new aircraft
     @PostMapping("/aircraft")
-    public void createAircraft(@RequestBody Aircraft aircraft) {
+    public String createAircraft(@RequestBody Aircraft aircraft) {
+
         aircraftRepository.save(aircraft);
+        return "The Aircraft info was Added to Database";
     }
 
     // Update an existing aircraft
@@ -59,8 +61,8 @@ public class AircraftController {
         }
     }
     // Delete an existing aircraft
-    @DeleteMapping("/aircraft/{id}")
-    public void deleteAircraft (@PathVariable Long id){
-        aircraftRepository.deleteById(id);
-    }
+    //@DeleteMapping("/aircraft/{id}")
+    //public void deleteAircraft (@PathVariable Long id){
+        //aircraftRepository.deleteById(id);
+
 }
