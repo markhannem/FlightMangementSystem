@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "aircraft")
 public class Aircraft {
     @Id
-    @SequenceGenerator(name = "aircraft_sequence", sequenceName = "aircraft_sequence", allocationSize = 1, initialValue= 1)
+    @SequenceGenerator(name = "aircraft_sequence", sequenceName = "aircraft_sequence", allocationSize = 1)
     @GeneratedValue(generator = "aircraft_sequence")
     private Long id;
 

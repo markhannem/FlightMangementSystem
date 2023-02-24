@@ -5,18 +5,25 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table (name = "city")
 public class City {
     @Id
-    @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1, initialValue=1)
+    @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1)
     @GeneratedValue(generator = "city_sequence")
     private Long id;
+
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "city")
     private List<Airport> airports;
 
+    @Column(name = "state")
     private String state;
+    @Column(name = "population")
     private int population;
+
+
 
     public City() {
     }
