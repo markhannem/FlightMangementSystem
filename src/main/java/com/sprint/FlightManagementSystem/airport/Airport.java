@@ -1,7 +1,10 @@
 package com.sprint.FlightManagementSystem.airport;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sprint.FlightManagementSystem.city.City;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "airport")
@@ -17,13 +20,14 @@ public class Airport {
     @Column(name = "code")
     private String code;
 
-    public Airport() {
-    }
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private City city;
 
-
+    public Airport() {
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -44,5 +48,12 @@ public class Airport {
         return code;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 }
 
