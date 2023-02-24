@@ -6,27 +6,48 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+//@Entity
+//@Table(name = "airport")
+//public class Airport {
+//    @Id
+//    @SequenceGenerator(name = "airport_sequence", sequenceName = "airport_sequence", allocationSize = 1, initialValue=1)
+//    @GeneratedValue(generator = "airport_sequence")
+//    private Long id;
+//
+//    @Column(name = "name")
+//    private String name;
+//
+//    @Column(name = "code")
+//    private String code;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "city_id")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnore
+//    private City city;
+//    @Column(name = "city_id", insertable = false, updatable = false) private Long cityId;
+
 @Entity
-@Table(name = "airport")
 public class Airport {
     @Id
-    @SequenceGenerator(name = "airport_sequence", sequenceName = "airport_sequence", allocationSize = 1, initialValue=1)
-    @GeneratedValue(generator = "airport_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "name")
     private String name;
 
     @Column(name = "code")
     private String code;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "city_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "city_id")
     private City city;
-
+    @Column(name = "city_id", insertable = false, updatable = false)
+    private Long cityId;
     public Airport() {
+    }
+
+    public Airport(City city) {
+        this.city = city;
     }
 
     public void setId(Long id) {
@@ -55,5 +76,6 @@ public class Airport {
     public void setCity(City city) {
         this.city = city;
     }
+
 }
 
