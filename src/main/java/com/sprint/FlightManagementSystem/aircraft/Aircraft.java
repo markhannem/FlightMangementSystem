@@ -1,6 +1,9 @@
 package com.sprint.FlightManagementSystem.aircraft;
 
+import com.sprint.FlightManagementSystem.passenger.Passenger;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "aircraft")
@@ -18,6 +21,13 @@ public class Aircraft {
 
     @Column(name = "numberOfPassengers")
     private int numberOfPassengers;
+
+
+    @ManyToMany
+    @JoinTable(name = "aircraft_passenger",
+            joinColumns = @JoinColumn(name = "aircraft_id"),
+            inverseJoinColumns = @JoinColumn(name = "passenger_id"))
+    private List<Passenger> passengers;
 
     public Aircraft() {
     }

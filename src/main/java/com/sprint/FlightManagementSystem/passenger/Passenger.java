@@ -1,24 +1,32 @@
 package com.sprint.FlightManagementSystem.passenger;
 
+import com.sprint.FlightManagementSystem.aircraft.Aircraft;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Table(name = "passenger")
 public class Passenger {
     @Id
     @SequenceGenerator(name = "passenger_sequence", sequenceName = "passenger_sequence", allocationSize = 1, initialValue=1)
     @GeneratedValue(generator = "passenger_sequence")
-
     private Long id;
 
-    @Column(name = "firstName" )
+    @Column(name = "firstName")
     private String firstName;
 
-    @Column(name ="lastName")
+    @Column(name = "lastName")
     private String lastName;
 
-    @Column(name="phoneNumber")
+    @Column(name = "phoneNumber")
     private String phoneNumber;
+
+    @ManyToMany
+    @JoinTable(name = "aircraft_passenger",
+            joinColumns = @JoinColumn(name = "passenger_id"),
+            inverseJoinColumns = @JoinColumn(name = "aircraft_id"))
+    private List<Aircraft> aircraft;
+
 
     public void setId(Long id) {
         this.id = id;
