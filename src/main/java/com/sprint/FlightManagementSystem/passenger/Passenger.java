@@ -41,7 +41,7 @@ public class Passenger {
             CascadeType.PERSIST,
                 CascadeType.MERGE
         },
-        mappedBy = "passenger")
+        mappedBy = "passengers")
     @JsonIgnore
     private Set<Aircraft> aircrafts = new HashSet<>();
 
