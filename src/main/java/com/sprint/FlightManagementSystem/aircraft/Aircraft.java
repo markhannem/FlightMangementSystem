@@ -1,6 +1,10 @@
 package com.sprint.FlightManagementSystem.aircraft;
 
+import com.sprint.FlightManagementSystem.passenger.Passenger;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "aircraft")
@@ -18,6 +22,16 @@ public class Aircraft {
 
     @Column(name = "numberOfPassengers")
     private int numberOfPassengers;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+    cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "aircraft_passenger",
+    joinColumns = { @JoinColumn(name = "aircraft_id")},
+    inverseJoinColumns = {@JoinColumn(name = "passenger_id")})
+    private Set<Passenger> passengers = new HashSet<>();
 
     public Aircraft() {
     }
@@ -46,5 +60,10 @@ public class Aircraft {
     public int getNumberOfPassengers() {
         return numberOfPassengers;
     }
+
+//    public void addPassenger(Passenger passenger){
+//        this.passengers.add(passenger);
+//        passenger.getPassengers().add(this);
+//    }
 
 }

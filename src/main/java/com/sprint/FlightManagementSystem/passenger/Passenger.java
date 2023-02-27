@@ -1,5 +1,6 @@
 package com.sprint.FlightManagementSystem.passenger;
 
+import com.sprint.FlightManagementSystem.aircraft.Aircraft;
 import jakarta.persistence.*;
 import com.sprint.FlightManagementSystem.city.City;
 import net.minidev.json.annotate.JsonIgnore;
@@ -7,6 +8,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.text.CharacterIterator;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -32,6 +35,15 @@ public class Passenger {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private City city;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+        cascade = {
+            CascadeType.PERSIST,
+                CascadeType.MERGE
+        },
+        mappedBy = "passengers")
+    @JsonIgnore
+    private Set<Aircraft> aircrafts = new HashSet<>();
 
     public void setId(Long id) {
         this.id = id;
@@ -71,6 +83,14 @@ public class Passenger {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public Set<Aircraft> getAircrafts(){
+        return aircrafts;
+    }
+
+    public void setAircrafts(Set<Aircraft> aircrafts){
+        this.aircrafts = aircrafts;
     }
 
 }
