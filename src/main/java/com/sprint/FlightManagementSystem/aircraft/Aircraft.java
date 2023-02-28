@@ -3,7 +3,8 @@ package com.sprint.FlightManagementSystem.aircraft;
 import com.sprint.FlightManagementSystem.passenger.Passenger;
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "aircraft")
@@ -23,12 +24,28 @@ public class Aircraft {
     private int numberOfPassengers;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
     @JoinTable(name = "aircraft_passenger",
-            joinColumns = @JoinColumn(name = "aircraft_id"),
-            inverseJoinColumns = @JoinColumn(name = "passenger_id"))
-    private List<Passenger> passengers;
+            joinColumns = { @JoinColumn(name = "aircraft_id")},
+            inverseJoinColumns = {@JoinColumn(name = "passenger_id")})
+    private Set<Passenger> passengers = new HashSet<>();
+//    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                    CascadeType.PERSIST,
+//                    CascadeType.MERGE
+//            })
+//    @JoinTable(name = "aircraft_passenger",
+//            joinColumns = { @JoinColumn(name = "aircraft_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "passenger_id")})
+//    private Set<Passenger> passengers = new HashSet<>();
 
+    public Set<Passenger> getPassengers() {
+        return this.passengers;
+    }
     public Aircraft() {
     }
 
@@ -56,5 +73,12 @@ public class Aircraft {
     public int getNumberOfPassengers() {
         return numberOfPassengers;
     }
+
+
+
+//    public void addPassenger(Passenger passenger){
+//        this.passengers.add(passenger);
+//        passenger.getPassengers().add(this);
+//    }
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Passenger {
     @Id
-    @SequenceGenerator(name = "passenger_sequence", sequenceName = "passenger_sequence", allocationSize = 1, initialValue=1)
+    @SequenceGenerator(name = "passenger_sequence", sequenceName = "passenger_sequence", allocationSize = 1)
     @GeneratedValue(generator = "passenger_sequence")
     private Long id;
 
@@ -53,6 +53,9 @@ public class Passenger {
         return phoneNumber;
     }
 
+    public List<Aircraft> getAircraft() {
+        return aircraft;
+    }
 }
 
 

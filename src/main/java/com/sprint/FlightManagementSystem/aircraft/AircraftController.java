@@ -1,9 +1,12 @@
 package com.sprint.FlightManagementSystem.aircraft;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -22,11 +25,23 @@ public class AircraftController {
         return (List<Aircraft>) aircraftRepository.findAll();
     }
 
-    // Get aircraft by id
     @GetMapping(path = "{id}")
     public Aircraft getAircraftById(@PathVariable Long id) {
-        return aircraftRepository.findById(id).get();
+        Optional<Aircraft> aircraft = aircraftRepository.findById(id);
+
+        if (aircraft.isPresent()) {
+            Aircraft result = aircraft.get();
+            result.getPassengers(); // This will populate the set of passengers associated with the aircraft
+            return result;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aircraft not found");
+        }
     }
+    // Get aircraft by id
+//    @GetMapping(path = "{id}")
+//    public Aircraft getAircraftById(@PathVariable Long id) {
+//        return aircraftRepository.findById(id).get();
+//    }
 
     // Create a new aircraft
     @PostMapping

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface PassengerRepository
 extends CrudRepository<Passenger, Long> {
 
+
 }
