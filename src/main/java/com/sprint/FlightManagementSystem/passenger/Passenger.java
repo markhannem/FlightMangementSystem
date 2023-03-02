@@ -21,7 +21,11 @@ public class Passenger {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
     @JoinTable(name = "aircraft_passenger",
             joinColumns = @JoinColumn(name = "passenger_id"),
             inverseJoinColumns = @JoinColumn(name = "aircraft_id"))
@@ -56,6 +60,23 @@ public class Passenger {
     public List<Aircraft> getAircraft() {
         return aircraft;
     }
+
+    public void setAircraft(List<Aircraft> aircraft) {
+        this.aircraft = aircraft;
+    }
+
+    public void addAircraft(Aircraft aircraft) {
+        this.aircraft.add(aircraft);
+    }
+
+    public void removeAircraft(Aircraft aircraft) {
+        this.aircraft.remove(aircraft);
+    }
+
+    public Passenger() {
+    }
+
+
 }
 
 

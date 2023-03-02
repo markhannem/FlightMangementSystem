@@ -17,6 +17,9 @@ public class Airport {
     @Column(name = "code")
     private String code;
 
+//    @Column (name = "runway_length")
+//    private int runway_length;
+
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
@@ -55,4 +58,13 @@ public class Airport {
     public City getCity() {
         return city;
     }
+//
+//    public void setRunway_length(int runway_length) {
+//        this.runway_length = runway_length;
+//    }
+//
+//    public int getRunway_length() {
+//        return runway_length;
+//    }
+
 }

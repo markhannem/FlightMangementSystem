@@ -1,4 +1,4 @@
-package com.sprint.FlightManagementSystem;
+package com.sprint.FlightManagementSystem.passenger;
 
 import java.util.Set;
 

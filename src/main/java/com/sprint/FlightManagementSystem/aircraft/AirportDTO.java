@@ -1,13 +1,13 @@
-package com.sprint.FlightManagementSystem;
+package com.sprint.FlightManagementSystem.aircraft;
 
-public class CreateAirportRequest {
+public class AirportDTO {
     private String name;
     private String code;
     private Long city_id;
 
-    public CreateAirportRequest() {}
+    public AirportDTO() {}
 
-    public CreateAirportRequest(String name, String code, Long city_id) {
+    public AirportDTO(String name, String code, Long city_id) {
         this.name = name;
         this.code = code;
         this.city_id = city_id;

@@ -1,10 +1,8 @@
 package com.sprint.FlightManagementSystem.aircraft;
 
-import com.sprint.FlightManagementSystem.passenger.Passenger;
 import jakarta.persistence.*;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "aircraft")
@@ -23,62 +21,51 @@ public class Aircraft {
     @Column(name = "numberOfPassengers")
     private int numberOfPassengers;
 
+    @ElementCollection
+    @CollectionTable(name = "aircraft_passenger_ids", joinColumns = @JoinColumn(name = "aircraft_id"))
+    @Column(name = "passenger_id")
+    private List<Long> passengerIds = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "aircraft_passenger",
-            joinColumns = { @JoinColumn(name = "aircraft_id")},
-            inverseJoinColumns = {@JoinColumn(name = "passenger_id")})
-    private Set<Passenger> passengers = new HashSet<>();
-//    @ManyToMany(fetch = FetchType.LAZY,
-//            cascade = {
-//                    CascadeType.PERSIST,
-//                    CascadeType.MERGE
-//            })
-//    @JoinTable(name = "aircraft_passenger",
-//            joinColumns = { @JoinColumn(name = "aircraft_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "passenger_id")})
-//    private Set<Passenger> passengers = new HashSet<>();
-
-    public Set<Passenger> getPassengers() {
-        return this.passengers;
-    }
     public Aircraft() {
     }
 
     public void setId(Long id) {
         this.id = id;
     }
+
     public Long getId() {
         return id;
     }
+
     public void setType(String type) {
         this.type = type;
     }
+
     public String getType() {
         return type;
     }
+
     public void setAirlineName(String airlineName) {
         this.airlineName = airlineName;
     }
+
     public String getAirlineName() {
         return airlineName;
     }
+
     public void setNumberOfPassengers(int numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
     }
+
     public int getNumberOfPassengers() {
         return numberOfPassengers;
     }
 
+    public List<Long> getPassengerIds() {
+        return passengerIds;
+    }
 
-
-//    public void addPassenger(Passenger passenger){
-//        this.passengers.add(passenger);
-//        passenger.getPassengers().add(this);
-//    }
-
+    public void setPassengerIds(List<Long> passengerIds) {
+        this.passengerIds = passengerIds;
+    }
 }

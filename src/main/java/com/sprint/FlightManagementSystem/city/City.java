@@ -27,26 +27,46 @@ public class City {
     public void setId(Long id) {
         this.id = id;
     }
+
     public Long getId() {
         return id;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
+
     public void setState(String state) {
         this.state = state;
     }
+
     public String getState() {
         return state;
     }
+
     public void setPopulation(int population) {
         this.population = population;
     }
+
     public int getPopulation() {
         return population;
+    }
+
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
+    }
+
+    public List<Airport> getAirports() {
+        return airports;
+    }
+
+    @Override
+    public String toString() {
+        return "City [id=" + id + ", name=" + name + ", state=" + state + ", population=" + population + "]";
     }
 
 }

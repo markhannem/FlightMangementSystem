@@ -1,6 +1,6 @@
 package com.sprint.FlightManagementSystem.airport;
 
-import com.sprint.FlightManagementSystem.CreateAirportRequest;
+import com.sprint.FlightManagementSystem.aircraft.AirportDTO;
 import com.sprint.FlightManagementSystem.city.City;
 import com.sprint.FlightManagementSystem.city.CityRepository;
 import jakarta.persistence.PersistenceContext;
@@ -40,7 +40,7 @@ public class AirportController {
 
     @Transactional
     @PostMapping
-    public Airport createAirport(@RequestBody CreateAirportRequest request) {
+    public Airport createAirport(@RequestBody AirportDTO request) {
         Airport airport = new Airport();
         airport.setName(request.getName());
         airport.setCode(request.getCode());
