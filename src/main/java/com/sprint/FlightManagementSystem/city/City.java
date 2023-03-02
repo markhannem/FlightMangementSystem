@@ -1,5 +1,6 @@
 package com.sprint.FlightManagementSystem.city;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sprint.FlightManagementSystem.airport.Airport;
 import jakarta.persistence.*;
 import java.util.List;
@@ -12,6 +13,7 @@ public class City {
     private Long id;
     @Column(name = "name")
     private String name;
+
 
     @OneToMany(mappedBy = "city")
     private List<Airport> airports;

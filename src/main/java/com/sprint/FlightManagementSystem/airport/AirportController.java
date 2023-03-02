@@ -1,6 +1,5 @@
 package com.sprint.FlightManagementSystem.airport;
 
-import com.sprint.FlightManagementSystem.aircraft.AirportDTO;
 import com.sprint.FlightManagementSystem.city.City;
 import com.sprint.FlightManagementSystem.city.CityRepository;
 import jakarta.persistence.PersistenceContext;

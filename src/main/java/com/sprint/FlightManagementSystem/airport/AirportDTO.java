@@ -1,4 +1,4 @@
-package com.sprint.FlightManagementSystem.aircraft;
+package com.sprint.FlightManagementSystem.airport;
 
 public class AirportDTO {
     private String name;

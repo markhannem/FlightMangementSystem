@@ -32,6 +32,7 @@ public class Passenger {
     private List<Aircraft> aircraft;
 
 
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -72,6 +73,7 @@ public class Passenger {
     public void removeAircraft(Aircraft aircraft) {
         this.aircraft.remove(aircraft);
     }
+
 
     public Passenger() {
     }

@@ -1,5 +1,6 @@
 package com.sprint.FlightManagementSystem.airport;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sprint.FlightManagementSystem.city.City;
 import jakarta.persistence.*;
 
@@ -19,7 +20,7 @@ public class Airport {
 
 //    @Column (name = "runway_length")
 //    private int runway_length;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
