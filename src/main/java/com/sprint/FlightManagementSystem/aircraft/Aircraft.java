@@ -1,6 +1,13 @@
 package com.sprint.FlightManagementSystem.aircraft;
+import com.sprint.FlightManagementSystem.passenger.Passenger;
+
 
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +32,11 @@ public class Aircraft {
     @CollectionTable(name = "aircraft_passenger_ids", joinColumns = @JoinColumn(name = "aircraft_id"))
     @Column(name = "passenger_id")
     private List<Long> passengerIds = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "aircraft_id")
+    private List<Passenger> passengers = new ArrayList<>();
+
 
     public Aircraft() {
     }
@@ -67,5 +79,13 @@ public class Aircraft {
 
     public void setPassengerIds(List<Long> passengerIds) {
         this.passengerIds = passengerIds;
+    }
+
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
     }
 }

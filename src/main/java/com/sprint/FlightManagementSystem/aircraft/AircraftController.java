@@ -1,7 +1,5 @@
 package com.sprint.FlightManagementSystem.aircraft;
 
-import com.sprint.FlightManagementSystem.passenger.Passenger;
-import com.sprint.FlightManagementSystem.passenger.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,25 +34,6 @@ public class AircraftController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aircraft with id: " + id + " not found.");
         }
     }
-
-//    @Autowired
-//    private PassengerRepository passengerRepository;
-//    @GetMapping("/{id}/passengers")
-//    public List<Passenger> getPassengersByAircraftId(@PathVariable Long id) {
-//        Optional<Aircraft> aircraft = aircraftRepository.findById(id);
-//        if (aircraft.isPresent()) {
-//            List<Long> passengerIds = aircraft.get().getPassengerIds();
-//            List<Passenger> passengers = new ArrayList<>();
-//            for (Long passengerId : passengerIds) {
-//                Optional<Passenger> passenger = passengerRepository.findById(passengerId);
-//                passenger.ifPresent(passengers::add);
-//            }
-//            return passengers;
-//        } else {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aircraft with id: " + id + " not found.");
-//        }
-//    }
-
 
     // Create a new aircraft
     @PostMapping
@@ -104,4 +82,15 @@ public class AircraftController {
             }
         }
     }
+
+    @GetMapping("/{id}/passenger-ids")
+    public List<Long> getPassengerIdsByAircraftId(@PathVariable Long id) {
+        Optional<Aircraft> aircraft = aircraftRepository.findById(id);
+        if (aircraft.isPresent()) {
+            return aircraft.get().getPassengerIds();
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aircraft with id: " + id + " not found.");
+        }
+    }
+
 }
