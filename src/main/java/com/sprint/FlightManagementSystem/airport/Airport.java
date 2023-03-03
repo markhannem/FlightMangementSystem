@@ -3,6 +3,8 @@ package com.sprint.FlightManagementSystem.airport;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sprint.FlightManagementSystem.city.City;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "airport")
@@ -18,11 +20,11 @@ public class Airport {
     @Column(name = "code")
     private String code;
 
-//    @Column (name = "runway_length")
-//    private int runway_length;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "city_id")
+
     private City city;
 
     public Airport() {
@@ -52,6 +54,7 @@ public class Airport {
         return code;
     }
 
+
     public void setCity(City city) {
         this.city = city;
     }
@@ -67,5 +70,6 @@ public class Airport {
 //    public int getRunway_length() {
 //        return runway_length;
 //    }
+
 
 }
