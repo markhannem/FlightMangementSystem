@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,8 @@ public class PassengerController {
     @Autowired
     private PassengerRepository repo;
 
+    @Autowired
+    private PassengerRepository passengerRepository;
     @GetMapping
     public List<Passenger> getAllPassengers() {return (List<Passenger>) repo.findAll();}
 
@@ -47,6 +50,8 @@ public class PassengerController {
             }
         }
     }
+
+
 
     // DELETE REQUEST: Delete a Passenger
     @DeleteMapping(path = "{id}")
